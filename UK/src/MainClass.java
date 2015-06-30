@@ -77,7 +77,7 @@ public class MainClass implements communicationListener{
 	@Override
 	public void messageReceived(String message) {
 		if(isServer){
-			
+			System.out.println("debug");
 		}else{
 			
 		}
