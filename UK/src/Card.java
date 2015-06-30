@@ -4,7 +4,6 @@ public class Card {
 	public int id;
 	
 	
-	
+	//Dein Wecker ist ein Uhrensohn
 	
 }
-//moinmoin
