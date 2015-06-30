@@ -53,7 +53,11 @@ public class MainClass implements communicationListener{
 				send("00"+Integer.toString(id));
 			}
 		}else{
-			send("01");
+			if(id<10){
+				send("010"+Integer.toString(id));
+			}else{
+				send("01"+Integer.toString(id));
+			};
 		}
 		
 	}
@@ -72,9 +76,12 @@ public class MainClass implements communicationListener{
 
 	@Override
 	public void messageReceived(String message) {
-		
+		if(isServer){
+			
+		}else{
+			
+		}
 	}
-	
 	
 
 }
