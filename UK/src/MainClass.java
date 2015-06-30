@@ -1,34 +1,84 @@
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
-public class MainClass {
+public class MainClass implements communicationListener{
 	
 	Server server;
 	Client client;
+	Boolean isServer = true;
+	
+	ArrayList<Card> stack = new ArrayList();
+	ArrayList<Card> myDeck = new ArrayList();
+	
+	Monster monster1 = new Monster(1,"Feuerenzo",100,200);
 	
 	public static void main(String[] args) {
 		MainClass main = new MainClass();
+		main.initNetwork();
 		main.init();
 	}
 	
-	public void init(){
+	public void initNetwork(){
 		try {
-			server = new Server();
+			server = new Server(this);
 			server.start();// Server
 			
-			client = new Client();
+			client = new Client(this);
 			client.start(); // Client
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
+		}	
 		
 	}
 	
-	public void send(int i){
-		server.send(i);
+	private void init() {
+		
+		stack.add(monster1);
+		stack.add(monster1);
+		stack.add(monster1);
+		stack.add(monster1);
+		
+		getCard();
+		
+	}
+
+	public void getCard(){
+		myDeck.add(stack.get(stack.size()-1));
+		stack.remove(stack.size()-1);
+		int id = stack.get(stack.size()-1).id;
+		if(isServer){
+			if(id<10){
+				send("000"+Integer.toString(id));
+			}else{
+				send("00"+Integer.toString(id));
+			}
+		}else{
+			send("01");
+		}
+		
+	}
+	
+	
+	
+	
+	
+	public void send(String message){
+		if(isServer){
+			server.send(message);
+		}else{
+			client.send(message);
+		}
+	}
+
+	@Override
+	public void messageReceived(String message) {
+		
 	}
 	
 	
 
+}
+
+interface communicationListener{
+	public void messageReceived(String message);
 }

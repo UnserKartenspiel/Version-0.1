@@ -15,9 +15,10 @@ public class Server extends Thread {
 	Socket _ClientSocket = null;
 	PrintWriter _out = null;
 	BufferedReader _in = null;
+	MainClass main;
 
-	Server() throws Exception {
-
+	Server(MainClass main) throws Exception {
+		this.main = main;
 		_ServerSocket = new ServerSocket(4711);
 	}
 
@@ -31,6 +32,7 @@ public class Server extends Thread {
 				while (true) {
 					String incoming = _in.readLine();
 					frame.addAusgabe(incoming);
+					main.messageReceived(incoming);
 				} // while
 			} catch (IOException e) {
 				System.out.println("Fehler - ServerSocket.accept()");
@@ -38,8 +40,8 @@ public class Server extends Thread {
 		} // while
 	}
 
-	public void send(int i) {
-		_out.println(Integer.toString(i));
+	public void send(String message) {
+		_out.println(message);
 		_out.flush();
 	}
 }

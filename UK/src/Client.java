@@ -11,8 +11,13 @@ public class Client extends Thread {
 	PrintWriter _out = null;
 	BufferedReader _in = null;
 	Scanner _keyboard = new Scanner(System.in);
+	
+	MainClass main;
 
-	Client() {
+	Client(MainClass main) {
+		
+		this.main = main;
+		
 		try {
 			_Socket = new Socket("localhost", 4711);
 			_out = new PrintWriter(_Socket.getOutputStream(), true);
@@ -37,6 +42,7 @@ public class Client extends Thread {
 			try {
 				incoming = _in.readLine();
 				frame.addAusgabe(incoming);
+				main.messageReceived(incoming);
 			} // try
 			catch (IOException e) {
 				e.printStackTrace();
@@ -44,4 +50,10 @@ public class Client extends Thread {
 		} // while
 			// } // run()
 	}
+	
+	public void send(String message) {
+		_out.println(message);
+		_out.flush();
+	}
+	
 }
