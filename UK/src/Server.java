@@ -17,6 +17,7 @@ public class Server extends Thread {
 	BufferedReader _in = null;
 
 	Server() throws Exception {
+
 		_ServerSocket = new ServerSocket(4711);
 	}
 
@@ -26,8 +27,6 @@ public class Server extends Thread {
 				_ClientSocket = _ServerSocket.accept(); // Warte auf Verbindung
 				_out = new PrintWriter(_ClientSocket.getOutputStream(), true);// Ausgabestrom
 				_in = new BufferedReader(new InputStreamReader(_ClientSocket.getInputStream())); // Eingabestrom
-				_out.println("Test");
-				_out.flush();
 				frame = new myFrame("Chat :: Server", _out, _in);
 				while (true) {
 					String incoming = _in.readLine();
@@ -37,5 +36,10 @@ public class Server extends Thread {
 				System.out.println("Fehler - ServerSocket.accept()");
 			} // catch
 		} // while
+	}
+
+	public void send(int i) {
+		_out.println(Integer.toString(i));
+		_out.flush();
 	}
 }
