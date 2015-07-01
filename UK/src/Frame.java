@@ -26,7 +26,9 @@ import javax.swing.border.EtchedBorder;
 
 public class Frame extends JFrame{
 	private ActionListener gi;
-
+	
+	JPanel handPanel;
+	JPanel playedPanel;
 	
 	public Frame(GameIntelligence gi) {
 		this.gi = gi;
@@ -41,11 +43,12 @@ public class Frame extends JFrame{
 		JPanel oPlayedPanel = new JPanel();
 		oPlayedPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		JPanel handPanel = new JPanel();
+		handPanel = new JPanel();
 		handPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JPanel playedPanel = new JPanel();
+		playedPanel = new JPanel();
 		playedPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		playedPanel.addMouseListener(gi);
 		
 		JButton stackButton = new JButton("Stack");
 		stackButton.addActionListener(gi);
@@ -91,4 +94,6 @@ public class Frame extends JFrame{
 		);
 		getContentPane().setLayout(groupLayout);
 	}
+
+
 }
