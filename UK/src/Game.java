@@ -6,6 +6,7 @@ public class Game {
 		   Frame frame = new Frame(gi);
 		   frame.setVisible(true);
 		   client.setGi(gi);
+		   gi.setFrame(frame);
 	   }
 
 }

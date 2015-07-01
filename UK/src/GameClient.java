@@ -37,7 +37,6 @@ public class GameClient implements Runnable {
 
 	public void send(String message){
 		try {
-			System.out.println("awd");
 			streamOut.writeUTF(message);
 			streamOut.flush();
 		} catch (IOException e) {
