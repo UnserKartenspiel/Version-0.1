@@ -13,10 +13,11 @@ public class GameIntelligence implements GameListener, ActionListener, MouseList
 	Frame frame;
 	ArrayList<Card> stack = new ArrayList();
 	ArrayList<Card> hand = new ArrayList();
+	ArrayList<Card> played = new ArrayList();
+	ArrayList<Card> opponentPlayed = new ArrayList();
 	Boolean cardSelected = false;
 	int selectedHandCardID = 99; // Keine Handkarte ausgewählt
 	int selectedPlayedCardID = 99; // Keine gespielte Karte ausgewählt
-	int opponentHandCounter = 0;
 
 	@Override
 	public void messageReceived(String message) {
@@ -35,12 +36,14 @@ public class GameIntelligence implements GameListener, ActionListener, MouseList
 	}
 
 	private void opponentPlaysCard(String message) {
-		System.out.println(message);
-		frame.oHandPanel.removeAll();
-		opponentHandCounter--;
-		for(int i = 1;i<=opponentHandCounter;i++){
-			frame.oHandPanel.add(new CardBackside());
-		}
+		frame.oHandPanel.remove(frame.oHandPanel.getComponentCount()-1);
+		frame.revalidate();
+		frame.repaint();
+		int id = Integer.parseInt(message.replaceAll("Karte ausgespielt ",""));
+		Card card = new Card(id,this);
+		opponentPlayed.add(card);
+		opponentPlayed.get(opponentPlayed.size()-1).setActionCommand("Karte auf gegnerischer Hand " + id);
+		frame.oPlayedPanel.add(card);
 		frame.revalidate();
 		frame.repaint();
 	}
@@ -49,7 +52,6 @@ public class GameIntelligence implements GameListener, ActionListener, MouseList
 		frame.oHandPanel.add(new CardBackside());
 		frame.revalidate();
 		frame.repaint();
-		opponentHandCounter++;
 	}
 
 	public GameIntelligence(GameClient client) {
@@ -112,7 +114,7 @@ public class GameIntelligence implements GameListener, ActionListener, MouseList
 	public void mouseClicked(MouseEvent e) {
 		if (e.getComponent().equals(frame.playedPanel) && cardSelected) {
 			hand.get(selectedHandCardID).setSpecialSelected(false);
-			send("Karte ausgespielt " + hand.get(selectedHandCardID).id);
+			playCard(selectedHandCardID);
 			removeCardFromHand(selectedHandCardID);
 			cardSelected = false;
 			selectedHandCardID = 99;
@@ -125,6 +127,15 @@ public class GameIntelligence implements GameListener, ActionListener, MouseList
 				cardSelected = false;
 			}
 		}
+	}
+
+	private void playCard(int selectedHandCardID) {
+		played.add(hand.get(selectedHandCardID));
+		played.get(played.size()-1).setActionCommand("Ausgespielte Karte " + played.get(played.size()-1));
+		send("Karte ausgespielt " + hand.get(selectedHandCardID).id);
+		frame.playedPanel.add(played.get(played.size()-1));
+		frame.revalidate();
+		frame.repaint();
 	}
 
 	private void removeCardFromHand(int selectedHandCardID) {
