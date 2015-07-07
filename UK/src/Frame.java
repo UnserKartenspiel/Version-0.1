@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 
 public class Frame extends JFrame{
 	private ActionListener gi;
@@ -60,28 +61,25 @@ public class Frame extends JFrame{
 		JButton stackButton = new JButton("Stack");
 		stackButton.addActionListener(gi);
 		
+		JButton finishButton = new JButton("Fertig");
+		finishButton.addActionListener(gi);
+		
 		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(oPlayedPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(playedPanel, GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(stackButton)
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(handPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-							.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(oPlayedPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+						.addComponent(playedPanel, GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(oHandPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addComponent(finishButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 764, Short.MAX_VALUE)
+							.addComponent(stackButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+						.addComponent(handPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+						.addComponent(oHandPanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -91,7 +89,11 @@ public class Frame extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(oPlayedPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(stackButton, GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(stackButton, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(playedPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -100,6 +102,4 @@ public class Frame extends JFrame{
 		);
 		getContentPane().setLayout(groupLayout);
 	}
-
-
 }
