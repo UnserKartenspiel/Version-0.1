@@ -1,31 +1,14 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Window.Type;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
-import javax.swing.JSplitPane;
-import javax.swing.JInternalFrame;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
-import javax.swing.SpringLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EtchedBorder;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import javax.swing.ImageIcon;
 
 public class Frame extends JFrame{
 	private ActionListener gi;
@@ -34,6 +17,7 @@ public class Frame extends JFrame{
 	JPanel playedPanel;
 	JPanel oHandPanel;
 	JPanel oPlayedPanel;
+	OverlayPane overlayPane;
 	
 	public Frame(GameIntelligence gi) {
 		setSize(1000,800);
@@ -43,12 +27,17 @@ public class Frame extends JFrame{
 		setTitle("UK - The Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		overlayPane = new OverlayPane(gi);
+		setGlassPane(overlayPane);
+		getGlassPane().setVisible(true);
+		
 		
 		oHandPanel = new JPanel();
 		oHandPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		oPlayedPanel = new JPanel();
 		oPlayedPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		oPlayedPanel.addMouseListener(gi);
 		
 		handPanel = new JPanel();
 		handPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -88,12 +77,10 @@ public class Frame extends JFrame{
 					.addComponent(oHandPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(oPlayedPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+					.addGap(6)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(stackButton, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addComponent(finishButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(playedPanel, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)

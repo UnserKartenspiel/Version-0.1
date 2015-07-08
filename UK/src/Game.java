@@ -7,6 +7,7 @@ public class Game {
 		   frame.setVisible(true);
 		   client.setGi(gi);
 		   gi.setFrame(frame);
+		   SoundManager soundManager = new SoundManager();
 	   }
 
 }

@@ -17,6 +17,7 @@ public class GameClient implements Runnable {
 		try {
 			socket = new Socket(serverName, serverPort);
 			System.out.println("Connected: " + socket);
+			//send("Ready");
 			start();
 		} catch (UnknownHostException uhe) {
 			System.out.println("Host unknown: " + uhe.getMessage());

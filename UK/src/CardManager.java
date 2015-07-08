@@ -36,7 +36,9 @@ public class CardManager {
 				int id = Integer.parseInt(node.getChildText("id"));
 				String name = node.getChildText("name");
 				String imgsrc = node.getChildText("img");
-				deck.add(new Card(id,al,imgsrc,name));
+				int hp = Integer.parseInt(node.getChildText("hp"));
+				int ap = Integer.parseInt(node.getChildText("ap"));
+				deck.add(new Card(id,al,imgsrc,name,hp,ap));
 			}	
 			
 		} catch (JDOMException | IOException e) {
@@ -57,6 +59,8 @@ public class CardManager {
 	public Card createCard(int id){
 		String name = "";
 		String imgsrc = "";
+		int ap = 0;
+		int hp = 0;
 		
 		for(int i = 0;i < list.size();i++){
 			Element node = (Element) list.get(i);
@@ -64,9 +68,11 @@ public class CardManager {
 			if(Integer.parseInt(node.getChildText("id"))==id){
 				name = node.getChildText("name");
 				imgsrc = node.getChildText("img");
+				hp = Integer.parseInt(node.getChildText("hp"));
+				ap = Integer.parseInt(node.getChildText("ap"));
 				break;
 			}
 		}	
-		return new Card(id,al,imgsrc,name);
+		return new Card(id,al,imgsrc,name,hp,ap);
 	}
 }

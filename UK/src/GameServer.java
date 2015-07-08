@@ -6,6 +6,7 @@ public class GameServer implements Runnable {
 	private ServerSocket server = null;
 	private Thread thread = null;
 	private int clientCount = 0;
+	private Boolean gameRunning = false;
 
 	public GameServer(int port) {
 		try {
@@ -30,6 +31,11 @@ public class GameServer implements Runnable {
 		}
 	}
 
+	private void setStartPlayer() {
+		int i = (int) (Math.random() + 0.5);
+		clients[i].send("Turn complete");
+	}
+
 	public void start() {
 		if (thread == null) {
 			thread = new Thread(this);
@@ -52,16 +58,18 @@ public class GameServer implements Runnable {
 	}
 
 	public synchronized void handle(int ID, String input) {
-		if (input.equals(".bye")) {
-			clients[findClient(ID)].send(".bye");
-			remove(ID);
-		} else
-			for (int i = 0; i < clientCount; i++)
-				if (clients[i].getID() == ID) {
-					clients[i].send(input+"i");
-				}else{
-					clients[i].send(input);
-				}
+		if (input.equals("setStartPlayer") && !gameRunning) {
+			setStartPlayer();
+			gameRunning = true;
+		}
+
+		for (int i = 0; i < clientCount; i++) {
+			if (clients[i].getID() == ID) {
+				clients[i].send(input + "i");
+			} else {
+				clients[i].send(input);
+			}
+		}
 	}
 
 	public synchronized void remove(int ID) {

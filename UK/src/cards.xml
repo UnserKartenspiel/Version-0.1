@@ -3,78 +3,78 @@
 	<Card>
 		<id>1</id>
 		<name>Karl Heinz Kocar</name>
-		<hp></hp>
-		<ap></ap>
-		<img>imgresources/khk.bmp</img>
+		<hp>100</hp>
+		<ap>50</ap>
+		<img></img>
 	</Card>
 	<Card>
 		<id>2</id>
 		<name>Rolf Gerdzen Kasper</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>100</hp>
+		<ap>60</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>3</id>
 		<name>Dieloth</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>100</hp>
+		<ap>70</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>4</id>
 		<name>Rocky Ben Socky</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>111</hp>
+		<ap>11</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>5</id>
 		<name>Dosenöffner</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>11</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>6</id>
 		<name>Hagen "Vastator" Leusin</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>7</id>
 		<name>Johannes Schulze Brandstifter</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>8</id>
 		<name>Erwin</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>9</id>
 		<name>Gabba Gandalf</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>10</id>
 		<name>Dr. Schütz Hallo</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 	<Card>
 		<id>11</id>
 		<name>Sternewilli</name>
-		<hp></hp>
-		<ap></ap>
+		<hp>123</hp>
+		<ap>123</ap>
 		<img></img>
 	</Card>
 </Deck>
